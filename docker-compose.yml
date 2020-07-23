@@ -6,3 +6,19 @@ services:
       - ./:/go/src/github.com/Le0tk0k/go-rest-api
     ports: 
       - "8080:8080"
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    ports: 
+      - "3306:3306"
+    volumes: 
+      - ./db/mysql_init:/docker-entrypoint-initdb.d
+      - ./db/mysql_data:/var/lib/mysql
+      - ./db/mysql_conf/:/etc/mysql/conf.d
+    environment: 
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: go-rest-api
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
