@@ -13,7 +13,7 @@ func NewMySqlDb() *gorm.DB {
 		"%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",
 		"user",
 		"password",
-		"127.0.0.1",
+		"db",
 		"3306",
 		"go-rest-api",
 	)
