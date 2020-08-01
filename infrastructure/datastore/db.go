@@ -18,7 +18,7 @@ func NewMySqlDb() *gorm.DB {
 		"go-rest-api",
 	)
 
-	conn, err ;= gorm.Open("mysql", connectionString)
+	conn, err := gorm.Open("mysql", connectionString)
 	if err != nil {
 		panic(err)
 	}
