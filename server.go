@@ -9,7 +9,7 @@ import (
 
 func main() {
 	e := echo.New()
-	conn := datastore.NewMySqlDB()
+	conn := datastore.NewMySqlDb()
 	defer conn.Close()
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, World!")
