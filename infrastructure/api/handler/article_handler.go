@@ -36,7 +36,7 @@ func (aH *articleHandler) CreateArticle(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
 	}
 
-	c.JSON(http.StatusOK, a)
+	return c.JSON(http.StatusOK, a)
 }
 
 func (aH *articleHandler) GetArticles(c echo.Context) error {
@@ -46,7 +46,7 @@ func (aH *articleHandler) GetArticles(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
 	}
 
-	c.JSON(http.StatusOK, a)
+	return c.JSON(http.StatusOK, a)
 }
 
 func (aH *articleHandler) GetArticle(c echo.Context) error {
@@ -61,7 +61,7 @@ func (aH *articleHandler) GetArticle(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
 	}
 
-	c.JSON(http.StatusOK, a)
+	return c.JSON(http.StatusOK, a)
 }
 
 func (aH *articleHandler) UpdateArticle(c echo.Context) error {
@@ -81,7 +81,7 @@ func (aH *articleHandler) UpdateArticle(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
 	}
 
-	c.JSON(http.StatusOK, a)
+	return c.JSON(http.StatusOK, a)
 }
 
 func (aH *articleHandler) DeleteArticle(c echo.Context) error {
@@ -95,5 +95,5 @@ func (aH *articleHandler) DeleteArticle(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
 	}
 
-	c.JSON(http.StatusCreated, "success")
+	return c.JSON(http.StatusCreated, "success")
 }

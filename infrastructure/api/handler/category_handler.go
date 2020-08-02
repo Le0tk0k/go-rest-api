@@ -35,7 +35,7 @@ func (cH *categoryHandler) CreateCategory(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
 	}
 
-	c.JSON(http.StatusOK, cg)
+	return c.JSON(http.StatusOK, cg)
 }
 
 func (cH *categoryHandler) GetCategories(c echo.Context) error {
@@ -45,7 +45,7 @@ func (cH *categoryHandler) GetCategories(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
 	}
 
-	c.JSON(http.StatusOK, cg)
+	return c.JSON(http.StatusOK, cg)
 }
 
 func (cH *categoryHandler) GetCategory(c echo.Context) error {
@@ -60,7 +60,7 @@ func (cH *categoryHandler) GetCategory(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
 	}
 
-	c.JSON(http.StatusOK, cg)
+	return c.JSON(http.StatusOK, cg)
 }
 
 func (cH *categoryHandler) UpdateCategory(c echo.Context) error {
@@ -80,7 +80,7 @@ func (cH *categoryHandler) UpdateCategory(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
 	}
 
-	c.JSON(http.StatusOK, cg)
+	return c.JSON(http.StatusOK, cg)
 }
 
 func (cH *categoryHandler) DeleteCategory(c echo.Context) error {
@@ -94,5 +94,5 @@ func (cH *categoryHandler) DeleteCategory(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
 	}
 
-	c.JSON(http.StatusCreated, "success")
+	return c.JSON(http.StatusCreated, "success")
 }
