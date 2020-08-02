@@ -25,9 +25,9 @@ func main() {
 
 	e.Get("/categories", cH.GetCategories)
 	e.Get("/categories/:id", cH.GetCategory)
-	e.Get("/categories", cH.CreateCategory)
-	e.Get("/categories/:id", cH.UpdateCategory)
-	e.Get("/categories/:id", cH.DeleteCategory)
+	e.POST("/categories", cH.CreateCategory)
+	e.PUT("/categories/:id", cH.UpdateCategory)
+	e.DELETE("/categories/:id", cH.DeleteCategory)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }
