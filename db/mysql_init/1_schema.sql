@@ -1,4 +1,3 @@
-CREATE DATABASE IF NOT EXISTS go_rest_api;
 USE go_rest_api;
 
 CREATE TABLE IF NOT EXISTS articles (
