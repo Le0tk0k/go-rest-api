@@ -6,7 +6,7 @@ import (
 
 	"github.com/Le0tk0k/go-rest-api/domain/model"
 	"github.com/Le0tk0k/go-rest-api/usecase/repository"
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 )
 
 type articleHandler struct {
