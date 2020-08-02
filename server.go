@@ -23,8 +23,8 @@ func main() {
 	e.PUT("/articles/:id", aH.UpdateArticle)
 	e.DELETE("/articles/:id", aH.DeleteArticle)
 
-	e.Get("/categories", cH.GetCategories)
-	e.Get("/categories/:id", cH.GetCategory)
+	e.GET("/categories", cH.GetCategories)
+	e.GET("/categories/:id", cH.GetCategory)
 	e.POST("/categories", cH.CreateCategory)
 	e.PUT("/categories/:id", cH.UpdateCategory)
 	e.DELETE("/categories/:id", cH.DeleteCategory)
