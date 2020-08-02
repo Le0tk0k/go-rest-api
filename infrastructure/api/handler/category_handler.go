@@ -26,7 +26,7 @@ func NewCategoryHandler(cR repository.CategoryRepository) CategoryHandler {
 }
 
 func (cH *categoryHandler) CreateCategory(c echo.Context) {
-	cg = &model.Category{}
+	cg := &model.Category{}
 	c.Bind(cg)
 	cH.categoryRepository.Store(cg)
 
@@ -65,6 +65,4 @@ func (cH *categoryHandler) DeleteCategory(c echo.Context) {
 	id, err := strconv.Atoi(idString)
 
 	cH.categoryRepository.Delete(&model.Category{ID: id})
-
-	c.JSON(http.StatusNoContent, echo.H{"message": "ok"})
 }

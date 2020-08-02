@@ -3,7 +3,7 @@ package model
 import "time"
 
 type Article struct {
-	ID        uint      `gorm:"primary_key" json:"id"`
+	ID        int       `gorm:"primary_key" json:"id"`
 	Title     string    `json:"title" validate:"required"`
 	Url       string    `json:"url" validate:"required"`
 	CreatedAt time.Time `json:"-"`

@@ -27,7 +27,7 @@ func NewArticleHandler(aR repository.ArticleRepository, cR repository.CategoryRe
 }
 
 func (aH *articleHandler) CreateArticle(c echo.Context) {
-	a = &model.Article{}
+	a := &model.Article{}
 	c.Bind(a)
 	aH.articleRepository.Store(a)
 
@@ -66,6 +66,4 @@ func (aH *articleHandler) DeleteArticle(c echo.Context) {
 	id, err := strconv.Atoi(idString)
 
 	aH.articleRepository.Delete(&model.Article{ID: id})
-
-	c.JSON(http.StatusNoContent, echo.H{"message": "ok"})
 }
