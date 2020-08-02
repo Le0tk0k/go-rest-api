@@ -27,42 +27,82 @@ func NewCategoryHandler(cR repository.CategoryRepository) CategoryHandler {
 
 func (cH *categoryHandler) CreateCategory(c echo.Context) {
 	cg := &model.Category{}
-	c.Bind(cg)
-	cH.categoryRepository.Store(cg)
+	if err := c.Bind(cg); err != nil {
+		c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
+		return
+	}
+
+	if err := cH.categoryRepository.Store(cg); err != nil {
+		c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
+		return
+	}
 
 	c.JSON(http.StatusOK, cg)
 }
 
 func (cH *categoryHandler) GetCategories(c echo.Context) {
-	cg, _ := cH.categoryRepository.FindAll()
+	cg, err := cH.categoryRepository.FindAll()
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
+		return
+	}
 
 	c.JSON(http.StatusOK, cg)
 }
 
 func (cH *categoryHandler) GetCategory(c echo.Context) {
 	idString := c.Param("id")
-	id, _ := strconv.Atoi(idString)
+	id, err := strconv.Atoi(idString)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
+		return
+	}
 
-	cg, _ := cH.categoryRepository.FindByID(id)
+	cg, err := cH.categoryRepository.FindByID(id)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
+		return
+	}
 
 	c.JSON(http.StatusOK, cg)
 }
 
 func (cH *categoryHandler) UpdateCategory(c echo.Context) {
 	idString := c.Param("id")
-	id, _ := strconv.Atoi(idString)
+	id, err := strconv.Atoi(idString)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
+		return
+	}
 
 	cg := &model.Category{ID: id}
 
-	c.Bind(cg)
-	cH.categoryRepository.Update(cg)
+	if err := c.Bind(cg); err != nil {
+		c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
+		return
+	}
+
+	if err := cH.categoryRepository.Update(cg); err != nil {
+		c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
+		return
+	}
 
 	c.JSON(http.StatusOK, cg)
 }
 
 func (cH *categoryHandler) DeleteCategory(c echo.Context) {
 	idString := c.Param("id")
-	id, _ := strconv.Atoi(idString)
+	id, err := strconv.Atoi(idString)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
+		return
+	}
 
-	cH.categoryRepository.Delete(&model.Category{ID: id})
+	if err := cH.categoryRepository.Delete(&model.Category{ID: id}); err != nil {
+		c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusCreated, "success")
 }
