@@ -1,15 +1,5 @@
 version: '3'
 services: 
-  api:
-    tty: true
-    build: .
-    volumes: 
-      - ./:/go/src/github.com/Le0tk0k/go-rest-api
-    ports: 
-      - "8080:8080"
-    depends_on:
-      - db
-
   db:
     image: mysql:8.0
     ports: 
@@ -23,3 +13,14 @@ services:
       MYSQL_DATABASE: go-rest-api
       MYSQL_USER: user
       MYSQL_PASSWORD: password
+      
+  api:
+    tty: true
+    build: .
+    volumes: 
+      - ./:/go/src/github.com/Le0tk0k/go-rest-api
+    ports: 
+      - "8080:8080"
+    depends_on:
+      - db
+

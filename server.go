@@ -3,7 +3,8 @@ package main
 import (
 	"github.com/Le0tk0k/go-rest-api/infrastructure/api/handler"
 	"github.com/Le0tk0k/go-rest-api/infrastructure/datastore"
-	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 )
 
 func main() {
@@ -16,6 +17,9 @@ func main() {
 	cH := handler.NewCategoryHandler(categoryRepo)
 
 	e := echo.New()
+
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
 
 	e.GET("/articles", aH.GetArticles)
 	e.GET("/articles/:id", aH.GetArticle)
