@@ -1,17 +1,71 @@
 package handler
 
 import (
-	"github.com/Le0tk0k/go-rest-api/infrastructure/datastore"
+	"net/http"
+	"strconv"
+
+	"github.com/Le0tk0k/go-rest-api/domain/model"
+	"github.com/Le0tk0k/go-rest-api/usecase/repository"
 	"github.com/labstack/echo"
 )
 
 type articleHandler struct {
-	articleRepository datastore.ArticleRepository
+	articleRepository  repository.ArticleRepository
+	categoryRepository repository.CategoryRepository
 }
 
 type ArticleHandler interface {
-	CreateArticle(c echo.Context) error
-	GetArticles(c echo.Context) error
+	CreateArticle(c echo.Context)
+	GetArticles(c echo.Context)
+	GetArticle(c echo.Context)
+	UpdateArticle(c echo.Context)
+	DeleteArticle(c echo.Context)
 }
 
-func NewArticleHandler()
+func NewArticleHandler(aR repository.ArticleRepository, cR repository.CategoryRepository) ArticleHandler {
+	return &articleHandler{articleRepository: aR, categoryRepository: cR}
+}
+
+func (aH *articleHandler) CreateArticle(c echo.Context) {
+	a = &model.Article{}
+	c.Bind(a)
+	aH.articleRepository.Store(a)
+
+	c.JSON(http.StatusOK, a)
+}
+
+func (aH *articleHandler) GetArticles(c echo.Context) {
+	a, err := aH.articleRepository.FindAll()
+
+	c.JSON(http.StatusOK, a)
+}
+
+func (aH *articleHandler) GetArticle(c echo.Context) {
+	idString := c.Param("id")
+	id, err := strconv.Atoi(idString)
+
+	a, err := aH.articleRepository.FindByID(id)
+
+	c.JSON(http.StatusOK, a)
+}
+
+func (aH *articleHandler) UpdateArticle(c echo.Context) {
+	idString := c.Param("id")
+	id, err := strconv.Atoi(idString)
+
+	a := &model.Article{ID: id}
+
+	c.Bind(a)
+	aH.articleRepository.Update(a)
+
+	c.JSON(http.StatusOK, a)
+}
+
+func (aH *articleHandler) DeleteArticle(c echo.Context) {
+	idString := c.Param("id")
+	id, err := strconv.Atoi(idString)
+
+	aH.articleRepository.Delete(&model.Article{ID: id})
+
+	c.JSON(http.StatusNoContent, echo.H{"message": "ok"})
+}
