@@ -28,42 +28,82 @@ func NewArticleHandler(aR repository.ArticleRepository, cR repository.CategoryRe
 
 func (aH *articleHandler) CreateArticle(c echo.Context) {
 	a := &model.Article{}
-	c.Bind(a)
-	aH.articleRepository.Store(a)
+	if err := c.Bind(a); err != nil {
+		c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
+		return
+	}
+
+	if err := aH.articleRepository.Store(a); err != nil {
+		c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
+		return
+	}
 
 	c.JSON(http.StatusOK, a)
 }
 
 func (aH *articleHandler) GetArticles(c echo.Context) {
-	a, _ := aH.articleRepository.FindAll()
+	a, err := aH.articleRepository.FindAll()
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
+		return
+	}
 
 	c.JSON(http.StatusOK, a)
 }
 
 func (aH *articleHandler) GetArticle(c echo.Context) {
 	idString := c.Param("id")
-	id, _ := strconv.Atoi(idString)
+	id, err := strconv.Atoi(idString)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
+		return
+	}
 
-	a, _ := aH.articleRepository.FindByID(id)
+	a, err := aH.articleRepository.FindByID(id)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
+		return
+	}
 
 	c.JSON(http.StatusOK, a)
 }
 
 func (aH *articleHandler) UpdateArticle(c echo.Context) {
 	idString := c.Param("id")
-	id, _ := strconv.Atoi(idString)
+	id, err := strconv.Atoi(idString)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
+		return
+	}
 
 	a := &model.Article{ID: id}
 
-	c.Bind(a)
-	aH.articleRepository.Update(a)
+	if err := c.Bind(a); err != nil {
+		c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
+		return
+	}
+
+	if err := aH.articleRepository.Update(a); err != nil {
+		c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
+		return
+	}
 
 	c.JSON(http.StatusOK, a)
 }
 
 func (aH *articleHandler) DeleteArticle(c echo.Context) {
 	idString := c.Param("id")
-	id, _ := strconv.Atoi(idString)
+	id, err := strconv.Atoi(idString)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
+		return
+	}
 
-	aH.articleRepository.Delete(&model.Article{ID: id})
+	if err := aH.articleRepository.Delete(&model.Article{ID: id}); err != nil {
+		c.JSON(http.StatusBadRequest, model.ResponseError{Message: err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusCreated, "success")
 }
