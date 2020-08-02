@@ -10,10 +10,10 @@ services:
       - ./db/mysql_conf/:/etc/mysql/conf.d
     environment: 
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: go-rest-api
+      MYSQL_DATABASE: go_rest_api
       MYSQL_USER: user
       MYSQL_PASSWORD: password
-      
+
   api:
     tty: true
     build: .

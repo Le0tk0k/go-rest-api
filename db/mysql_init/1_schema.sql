@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS go-rest-api;
-USE go-rest-api;
+CREATE DATABASE IF NOT EXISTS go_rest_api;
+USE go_rest_api;
 
 CREATE TABLE IF NOT EXISTS articles (
   id          INT PRIMARY KEY NOT NULL AUTO_INCREMENT,

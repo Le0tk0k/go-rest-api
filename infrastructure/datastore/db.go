@@ -15,7 +15,7 @@ func NewMySqlDb() *gorm.DB {
 		"password",
 		"db",
 		"3306",
-		"go-rest-api",
+		"go_rest_api",
 	)
 
 	conn, err := gorm.Open("mysql", connectionString)
