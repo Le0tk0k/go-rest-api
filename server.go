@@ -1,18 +1,33 @@
 package main
 
 import (
-	"net/http"
-
+	"github.com/Le0tk0k/go-rest-api/infrastructure/api/handler"
 	"github.com/Le0tk0k/go-rest-api/infrastructure/datastore"
 	"github.com/labstack/echo/v4"
 )
 
 func main() {
-	e := echo.New()
 	conn := datastore.NewMySqlDb()
 	defer conn.Close()
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!")
-	})
+	articleRepo := datastore.NewArticleRepository(conn)
+	categoryRepo := datastore.NewCategoryRepository(conn)
+
+	aH := handler.NewArticleHandler(articleRepo, categoryRepo)
+	cH := handler.NewCategoryHandler(categoryRepo)
+
+	e := echo.New()
+
+	e.GET("/articles", aH.GetArticles)
+	e.GET("/articles/:id", aH.GetArticle)
+	e.POST("/articles", aH.CreateArticle)
+	e.PUT("/articles/:id", aH.UpdateArticle)
+	e.DELETE("/articles/:id", aH.DeleteArticle)
+
+	e.Get("/categories", cH.GetCategories)
+	e.Get("/categories/:id", cH.GetCategory)
+	e.Get("/categories", cH.CreateCategory)
+	e.Get("/categories/:id", cH.UpdateCategory)
+	e.Get("/categories/:id", cH.DeleteCategory)
+
 	e.Logger.Fatal(e.Start(":8080"))
 }
