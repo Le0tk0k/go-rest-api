@@ -34,23 +34,23 @@ func (cH *categoryHandler) CreateCategory(c echo.Context) {
 }
 
 func (cH *categoryHandler) GetCategories(c echo.Context) {
-	cg, err := cH.categoryRepository.FindAll()
+	cg, _ := cH.categoryRepository.FindAll()
 
 	c.JSON(http.StatusOK, cg)
 }
 
 func (cH *categoryHandler) GetCategory(c echo.Context) {
 	idString := c.Param("id")
-	id, err := strconv.Atoi(idString)
+	id, _ := strconv.Atoi(idString)
 
-	cg, err := cH.categoryRepository.FindByID(id)
+	cg, _ := cH.categoryRepository.FindByID(id)
 
 	c.JSON(http.StatusOK, cg)
 }
 
 func (cH *categoryHandler) UpdateCategory(c echo.Context) {
 	idString := c.Param("id")
-	id, err := strconv.Atoi(idString)
+	id, _ := strconv.Atoi(idString)
 
 	cg := &model.Category{ID: id}
 
@@ -62,7 +62,7 @@ func (cH *categoryHandler) UpdateCategory(c echo.Context) {
 
 func (cH *categoryHandler) DeleteCategory(c echo.Context) {
 	idString := c.Param("id")
-	id, err := strconv.Atoi(idString)
+	id, _ := strconv.Atoi(idString)
 
 	cH.categoryRepository.Delete(&model.Category{ID: id})
 }

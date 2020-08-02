@@ -35,23 +35,23 @@ func (aH *articleHandler) CreateArticle(c echo.Context) {
 }
 
 func (aH *articleHandler) GetArticles(c echo.Context) {
-	a, err := aH.articleRepository.FindAll()
+	a, _ := aH.articleRepository.FindAll()
 
 	c.JSON(http.StatusOK, a)
 }
 
 func (aH *articleHandler) GetArticle(c echo.Context) {
 	idString := c.Param("id")
-	id, err := strconv.Atoi(idString)
+	id, _ := strconv.Atoi(idString)
 
-	a, err := aH.articleRepository.FindByID(id)
+	a, _ := aH.articleRepository.FindByID(id)
 
 	c.JSON(http.StatusOK, a)
 }
 
 func (aH *articleHandler) UpdateArticle(c echo.Context) {
 	idString := c.Param("id")
-	id, err := strconv.Atoi(idString)
+	id, _ := strconv.Atoi(idString)
 
 	a := &model.Article{ID: id}
 
@@ -63,7 +63,7 @@ func (aH *articleHandler) UpdateArticle(c echo.Context) {
 
 func (aH *articleHandler) DeleteArticle(c echo.Context) {
 	idString := c.Param("id")
-	id, err := strconv.Atoi(idString)
+	id, _ := strconv.Atoi(idString)
 
 	aH.articleRepository.Delete(&model.Article{ID: id})
 }
