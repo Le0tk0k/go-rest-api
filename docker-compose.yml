@@ -1,6 +1,7 @@
 version: '3'
 services: 
   api:
+    tty: true
     build: .
     volumes: 
       - ./:/go/src/github.com/Le0tk0k/go-rest-api
