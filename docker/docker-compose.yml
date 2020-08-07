@@ -1,22 +1,23 @@
 version: '3'
 services: 
   db:
-    image: mysql:8.0
+    build: 
+      context: .
+      dockerfile: ./mysql/Dockerfile
     ports: 
       - "3306:3306"
     volumes: 
-      - ./db/mysql_init:/docker-entrypoint-initdb.d
-      - ./db/mysql_data:/var/lib/mysql
-      - ./db/mysql_conf/:/etc/mysql/conf.d
+      - ./mysql/db:/docker-entrypoint-initdb.d
     environment: 
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: go_rest_api
       MYSQL_USER: user
       MYSQL_PASSWORD: password
 
   api:
     tty: true
-    build: .
+    build:
+      context: .
+      dockerfile: ./api/Dockerfile
     volumes: 
       - ./:/go/src/github.com/Le0tk0k/go-rest-api
     ports: 
