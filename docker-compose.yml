@@ -3,7 +3,7 @@ services:
   db:
     build: 
       context: .
-      dockerfile: ./mysql/Dockerfile
+      dockerfile: ./docker/mysql/Dockerfile
     ports: 
       - "3306:3306"
     volumes: 
@@ -14,10 +14,10 @@ services:
       MYSQL_PASSWORD: password
 
   api:
-    tty: true
     build:
       context: .
-      dockerfile: ./api/Dockerfile
+      dockerfile: ./docker/api/Dockerfile
+    tty: true
     volumes: 
       - ./:/go/src/github.com/Le0tk0k/go-rest-api
     ports: 
