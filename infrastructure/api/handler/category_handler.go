@@ -4,7 +4,6 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/Le0tk0k/go-rest-api/domain/model"
 	"github.com/Le0tk0k/go-rest-api/usecase/repository"
 	"github.com/labstack/echo"
 )
