@@ -1,4 +1,4 @@
-package datastore
+package datasbase
 
 import (
 	"github.com/Le0tk0k/go-rest-api/usecase/repository"
