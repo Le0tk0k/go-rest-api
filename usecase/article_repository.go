@@ -1,4 +1,4 @@
-package repository
+package usecase
 
 import "github.com/Le0tk0k/go-rest-api/domain/model"
 
