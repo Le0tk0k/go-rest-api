@@ -7,7 +7,11 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
-func NewMySqlDb() *gorm.DB {
+type SqlHandler struct {
+	Conn *gorm.DB
+}
+
+func NewMySqlDb() *SqlHandler {
 
 	connectionString := fmt.Sprintf(
 		"%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",
@@ -31,5 +35,8 @@ func NewMySqlDb() *gorm.DB {
 	conn.LogMode(true)
 	conn.Set("gorm:table_options", "ENGINE=InnoDB")
 
-	return conn
+	sqlHandler := new(SqlHandler)
+	sqlHandler.Conn = conn
+
+	return sqlHandler
 }
