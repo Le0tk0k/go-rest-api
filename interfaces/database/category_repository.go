@@ -1,21 +1,22 @@
 package datasbase
 
 import (
+	"github.com/Le0tk0k/go-rest-api/domain"
 	"github.com/Le0tk0k/go-rest-api/usecase/repository"
 	"github.com/jinzhu/gorm"
 )
 
 type categoryRepository struct {
-	db *gorm.DB
+	SqlHandler
 }
 
 func NewCategoryRepository(db *gorm.DB) repository.CategoryRepository {
 	return &categoryRepository{db}
 }
 
-func (categoryRepository *categoryRepository) FindByID(id int) (*model.Category, error) {
-	category := model.Category{}
-	err := categoryRepository.db.First(&category, id).Error
+func (categoryRepository *categoryRepository) FindByID(id int) (*domain.Category, error) {
+	category := domain.Category{}
+	err := categoryRepository.First(&category, id).Error
 	if err != nil {
 		return nil, err
 	}
@@ -23,22 +24,22 @@ func (categoryRepository *categoryRepository) FindByID(id int) (*model.Category,
 	return &category, nil
 }
 
-func (categoryRepository *categoryRepository) Store(category *model.Category) error {
-	return categoryRepository.db.Save(category).Error
+func (categoryRepository *categoryRepository) Store(category *domain.Category) error {
+	return categoryRepository.Save(category).Error
 }
 
-func (categoryRepository *categoryRepository) Update(category *model.Category) error {
-	return categoryRepository.db.Model(&model.Category{ID: category.ID}).Updates(category).Error
+func (categoryRepository *categoryRepository) Update(category *domain.Category) error {
+	return categoryRepository.Model(&domain.Category{ID: category.ID}).Updates(category).Error
 }
 
-func (categoryRepository *categoryRepository) Delete(category *model.Category) error {
-	return categoryRepository.db.Delete(category).Error
+func (categoryRepository *categoryRepository) Delete(category *domain.Category) error {
+	return categoryRepository.Delete(category).Error
 }
 
-func (categoryRepository *categoryRepository) FindAll() ([]*model.Category, error) {
-	categories := []*model.Category{}
+func (categoryRepository *categoryRepository) FindAll() ([]*domain.Category, error) {
+	categories := []*domain.Category{}
 
-	err := categoryRepository.db.Find(&categories).Error
+	err := categoryRepository.Find(&categories).Error
 	if err != nil {
 		return nil, err
 	}
