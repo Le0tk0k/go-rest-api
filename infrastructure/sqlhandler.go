@@ -2,6 +2,7 @@ package infrastructure
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/Le0tk0k/go-rest-api/interfaces/database"
 	"github.com/jinzhu/gorm"
@@ -23,7 +24,7 @@ func NewMySqlDb() database.SqlHandler {
 		"go_rest_api",
 	)
 
-	conn, err := gorm.Open("mysql", connectionString)
+	conn, err := open(connectionString, 30)
 	if err != nil {
 		panic(err)
 	}
@@ -40,6 +41,19 @@ func NewMySqlDb() database.SqlHandler {
 	sqlHandler.Conn = conn
 
 	return sqlHandler
+}
+
+func open(path string, count uint) (*gorm.DB, error) {
+	db, err := gorm.Open("mysql", path)
+	if err != nil {
+		if count == 0 {
+			return nil, fmt.Errorf("Retry count over")
+		}
+		time.Sleep(time.Second)
+		count--
+		return open(path, count)
+	}
+	return db, nil
 }
 
 func (handler *SqlHandler) Find(out interface{}, where ...interface{}) *gorm.DB {
