@@ -15,7 +15,7 @@ type SqlHandler struct {
 func NewMySqlDb() database.SqlHandler {
 
 	connectionString := fmt.Sprintf(
-		"%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",
+		"%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=true&loc=Local",
 		"user",
 		"password",
 		"db",
