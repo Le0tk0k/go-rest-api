@@ -78,6 +78,6 @@ func (handler *SqlHandler) Model(value interface{}) *gorm.DB {
 	return handler.Conn.Model(value)
 }
 
-func (handler *SqlHandler) Updates(value interface{}, ignoreProtectedAttrs ...bool) *gomr.DB {
+func (handler *SqlHandler) Updates(value interface{}, ignoreProtectedAttrs ...bool) *gorm.DB {
 	return handler.Conn.Updates(value, ignoreProtectedAttrs)
 }
