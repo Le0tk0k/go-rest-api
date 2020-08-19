@@ -42,4 +42,5 @@ func (articleRepository *ArticleRepository) FindAll() (articles domain.Articles,
 	if err = articleRepository.Find(&articles).Error; err != nil {
 		return
 	}
+	return
 }
