@@ -23,7 +23,7 @@ func NewCategoryController(sqlHandler database.SqlHandler) *CategoryController {
 	}
 }
 
-func (controller *CategoryController) CreateCategory(c echo.Context) error {
+func (controller *CategoryController) CreateCategory(c echo.Context) (err error) {
 	cg := domain.Category{}
 	c.Bind(&cg)
 	category, err := controller.Interactor.Add(cg)
@@ -36,7 +36,7 @@ func (controller *CategoryController) CreateCategory(c echo.Context) error {
 	return
 }
 
-func (controller *CategoryController) GetCategories(c echo.Context) error {
+func (controller *CategoryController) GetCategories(c echo.Context) (err error) {
 	categories, err := controller.Interactor.Categories()
 
 	if err != nil {
@@ -47,7 +47,7 @@ func (controller *CategoryController) GetCategories(c echo.Context) error {
 	return
 }
 
-func (controller *CategoryController) GetCategory(c echo.Context) error {
+func (controller *CategoryController) GetCategory(c echo.Context) (err error) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	category, err := controller.Interactor.CategoryByID(id)
 
@@ -59,7 +59,7 @@ func (controller *CategoryController) GetCategory(c echo.Context) error {
 	return
 }
 
-func (controller *CategoryController) UpdateCategory(c echo.Context) error {
+func (controller *CategoryController) UpdateCategory(c echo.Context) (err error) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	cg := domain.Category{ID: id}
 	c.Bind(&cg)
@@ -74,7 +74,7 @@ func (controller *CategoryController) UpdateCategory(c echo.Context) error {
 	return
 }
 
-func (controller *CategoryController) DeleteCategory(c echo.Context) error {
+func (controller *CategoryController) DeleteCategory(c echo.Context) (err error) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	category := domain.Category{ID: id}
 

@@ -25,7 +25,7 @@ func NewArticleController(sqlHandler database.SqlHandler) *ArticleController {
 	}
 }
 
-func (controller *ArticleController) CreateArticle(c echo.Context) error {
+func (controller *ArticleController) CreateArticle(c echo.Context) (err error) {
 	a := domain.Article{}
 	c.Bind(&a)
 	article, err := controller.Interactor.Add(a)
@@ -38,7 +38,7 @@ func (controller *ArticleController) CreateArticle(c echo.Context) error {
 	return
 }
 
-func (controller *ArticleController) GetArticles(c echo.Context) error {
+func (controller *ArticleController) GetArticles(c echo.Context) (err error) {
 	articles, err := controller.Interactor.Articles()
 
 	if err != nil {
@@ -49,7 +49,7 @@ func (controller *ArticleController) GetArticles(c echo.Context) error {
 	return
 }
 
-func (controller *ArticleController) GetArticle(c echo.Context) error {
+func (controller *ArticleController) GetArticle(c echo.Context) (err error) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	article, err := controller.Interactor.ArticleByID(id)
 
@@ -61,7 +61,7 @@ func (controller *ArticleController) GetArticle(c echo.Context) error {
 	return
 }
 
-func (controller *ArticleController) UpdateArticle(c echo.Context) error {
+func (controller *ArticleController) UpdateArticle(c echo.Context) (err error) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	a := domain.Article{ID: id}
 	c.Bind(&a)
@@ -76,7 +76,7 @@ func (controller *ArticleController) UpdateArticle(c echo.Context) error {
 	return
 }
 
-func (controller *ArticleController) DeleteArticle(c echo.Context) error {
+func (controller *ArticleController) DeleteArticle(c echo.Context) (err error) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	article := domain.Article{ID: id}
 
