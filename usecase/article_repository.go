@@ -6,6 +6,6 @@ type ArticleRepository interface {
 	FindByID(id int) (domain.Article, error)
 	Store(domain.Article) (domain.Article, error)
 	Update(domain.Article) (domain.Article, error)
-	Delete(domain.Article) error
+	DeleteByID(domain.Article) error
 	FindAll() (domain.Articles, error)
 }

@@ -31,7 +31,7 @@ func (categoryRepository *CategoryRepository) Update(cg domain.Category) (catego
 	return
 }
 
-func (categoryRepository *CategoryRepository) Delete(category domain.Category) (err error) {
+func (categoryRepository *CategoryRepository) DeleteByID(category domain.Category) (err error) {
 	if err = categoryRepository.Delete(&category).Error; err != nil {
 		return
 	}

@@ -51,13 +51,13 @@ func (controller *ArticleController) GetArticles(c echo.Context) (err error) {
 
 func (controller *ArticleController) GetArticle(c echo.Context) (err error) {
 	id, _ := strconv.Atoi(c.Param("id"))
-	article, err := controller.Interactor.ArticleByID(id)
+	article, err := controller.Interactor.ArticleById(id)
 
 	if err != nil {
 		c.JSON(500, NewError(err))
 		return
 	}
-	c.JSON(200, articles)
+	c.JSON(200, article)
 	return
 }
 

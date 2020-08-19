@@ -6,6 +6,6 @@ type CategoryRepository interface {
 	FindByID(id int) (domain.Category, error)
 	Store(domain.Category) (domain.Category, error)
 	Update(domain.Category) (domain.Category, error)
-	Delete(domain.Category) error
+	DeleteByID(domain.Category) error
 	FindAll() (domain.Categories, error)
 }

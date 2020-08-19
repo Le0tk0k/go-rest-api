@@ -32,7 +32,7 @@ func (controller *CategoryController) CreateCategory(c echo.Context) (err error)
 		c.JSON(500, NewError(err))
 		return
 	}
-	c.JSON(201, article)
+	c.JSON(201, category)
 	return
 }
 
@@ -43,19 +43,19 @@ func (controller *CategoryController) GetCategories(c echo.Context) (err error) 
 		c.JSON(500, NewError(err))
 		return
 	}
-	c.JSON(200, articles)
+	c.JSON(200, categories)
 	return
 }
 
 func (controller *CategoryController) GetCategory(c echo.Context) (err error) {
 	id, _ := strconv.Atoi(c.Param("id"))
-	category, err := controller.Interactor.CategoryByID(id)
+	category, err := controller.Interactor.CategoryById(id)
 
 	if err != nil {
 		c.JSON(500, NewError(err))
 		return
 	}
-	c.JSON(200, articles)
+	c.JSON(200, category)
 	return
 }
 

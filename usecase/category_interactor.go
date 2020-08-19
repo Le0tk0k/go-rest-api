@@ -27,6 +27,6 @@ func (interactor *CategoryInteractor) Update(cg domain.Category) (category domai
 }
 
 func (interactor *CategoryInteractor) DeleteById(category domain.Category) (err error) {
-	err = interactor.CategoryRepository.Delete(category)
+	err = interactor.CategoryRepository.DeleteByID(category)
 	return
 }

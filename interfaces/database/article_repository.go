@@ -31,7 +31,7 @@ func (articleRepository *ArticleRepository) Update(a domain.Article) (article do
 	return
 }
 
-func (articleRepository *ArticleRepository) Delete(article domain.Article) (err error) {
+func (articleRepository *ArticleRepository) DeleteByID(article domain.Article) (err error) {
 	if err = articleRepository.Delete(&article).Error; err != nil {
 		return
 	}
