@@ -10,3 +10,5 @@ type Article struct {
 	CreatedAt time.Time `json:"-"`
 	UpdatedAt time.Time `json:"-"`
 }
+
+type Articles []Article
