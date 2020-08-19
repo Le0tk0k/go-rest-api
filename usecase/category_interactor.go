@@ -16,13 +16,13 @@ func (interactor *CategoryInteractor) Categories() (categories domain.Category, 
 	return
 }
 
-func (interactor *CategoryInteractor) Add(category domain.Category) (category domain.Category, err error) {
-	category, err = interactor.CategoryRepository.Store(category)
+func (interactor *CategoryInteractor) Add(cg domain.Category) (category domain.Category, err error) {
+	category, err = interactor.CategoryRepository.Store(cg)
 	return
 }
 
-func (interactor *CategoryInteractor) Update(category domain.Category) (category domain.Category, err error) {
-	category, err = interactor.CategoryRepository.Update(category)
+func (interactor *CategoryInteractor) Update(cg domain.Category) (category domain.Category, err error) {
+	category, err = interactor.CategoryRepository.Update(cg)
 	return
 }
 
