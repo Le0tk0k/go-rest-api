@@ -80,7 +80,7 @@ func (controller *ArticleController) DeleteArticle(c echo.Context) (err error) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	article := domain.Article{ID: id}
 
-	err := controller.Interactor.DeleteById(article)
+	err = controller.Interactor.DeleteById(article)
 	if err != nil {
 		c.JSON(500, NewError(err))
 		return

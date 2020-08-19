@@ -78,7 +78,7 @@ func (controller *CategoryController) DeleteCategory(c echo.Context) (err error)
 	id, _ := strconv.Atoi(c.Param("id"))
 	category := domain.Category{ID: id}
 
-	err := controller.Interactor.DeleteById(category)
+	err = controller.Interactor.DeleteById(category)
 	if err != nil {
 		c.JSON(500, NewError(err))
 		return
