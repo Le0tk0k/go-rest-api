@@ -1,4 +1,4 @@
-package datasbase
+package database
 
 import (
 	"github.com/Le0tk0k/go-rest-api/domain"
