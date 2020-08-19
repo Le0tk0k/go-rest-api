@@ -2,15 +2,10 @@ package datasbase
 
 import (
 	"github.com/Le0tk0k/go-rest-api/domain"
-	"github.com/jinzhu/gorm"
 )
 
 type ArticleRepository struct {
 	SqlHandler
-}
-
-func NewArticleRepository(db *gorm.DB) repository.ArticleRepository {
-	return &articleRepository{db}
 }
 
 func (articleRepository *ArticleRepository) FindByID(id int) (*domain.Article, error) {

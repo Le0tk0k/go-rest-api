@@ -2,16 +2,10 @@ package datasbase
 
 import (
 	"github.com/Le0tk0k/go-rest-api/domain"
-	"github.com/Le0tk0k/go-rest-api/usecase/repository"
-	"github.com/jinzhu/gorm"
 )
 
 type CategoryRepository struct {
 	SqlHandler
-}
-
-func NewCategoryRepository(db *gorm.DB) repository.CategoryRepository {
-	return &categoryRepository{db}
 }
 
 func (categoryRepository *CategoryRepository) FindByID(id int) (*domain.Category, error) {
