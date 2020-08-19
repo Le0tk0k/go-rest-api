@@ -1,11 +1,11 @@
 package usecase
 
-import "github.com/Le0tk0k/go-rest-api/domain/model"
+import "github.com/Le0tk0k/go-rest-api/domain"
 
 type ArticleRepository interface {
-	FindByID(id int) (*model.Article, error)
-	Store(article *model.Article) error
-	Update(article *model.Article) error
-	Delete(article *model.Article) error
-	FindAll() ([]*model.Article, error)
+	FindByID(id int) (*domain.Article, error)
+	Store(article *domain.Article) error
+	Update(article *domain.Article) error
+	Delete(article *domain.Article) error
+	FindAll() ([]*domain.Article, error)
 }
