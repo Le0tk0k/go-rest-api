@@ -11,7 +11,7 @@ func (interactor *CategoryInteractor) CategoryById(id int) (category domain.Cate
 	return
 }
 
-func (interactor *CategoryInteractor) Categories() (categories domain.Category, err error) {
+func (interactor *CategoryInteractor) Categories() (categories domain.Categories, err error) {
 	categories, err = interactor.CategoryRepository.FindAll()
 	return
 }

@@ -11,7 +11,7 @@ func (interactor *ArticleInteractor) ArticleById(id int) (article domain.Article
 	return
 }
 
-func (interactor *ArticleInteractor) Articles() (articles domain.Article, err error) {
+func (interactor *ArticleInteractor) Articles() (articles domain.Articles, err error) {
 	articles, err = interactor.ArticleRepository.FindAll()
 	return
 }

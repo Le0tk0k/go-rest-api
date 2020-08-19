@@ -42,4 +42,5 @@ func (categoryRepository *CategoryRepository) FindAll() (categories domain.Categ
 	if err = categoryRepository.Find(&categories).Error; err != nil {
 		return
 	}
+	return
 }
