@@ -8,35 +8,38 @@ type CategoryRepository struct {
 	SqlHandler
 }
 
-func (categoryRepository *CategoryRepository) FindByID(id int) (*domain.Category, error) {
-	category := domain.Category{}
-	err := categoryRepository.First(&category, id).Error
-	if err != nil {
-		return nil, err
+func (categoryRepository *CategoryRepository) FindByID(id int) (category domain.Category, err error) {
+	if err = categoryRepository.Find(&category, id).Error; err != nil {
+		return
 	}
-
-	return &category, nil
+	return
 }
 
-func (categoryRepository *CategoryRepository) Store(category *domain.Category) error {
-	return categoryRepository.Save(category).Error
-}
-
-func (categoryRepository *CategoryRepository) Update(category *domain.Category) error {
-	return categoryRepository.Model(&domain.Category{ID: category.ID}).Updates(category).Error
-}
-
-func (categoryRepository *CategoryRepository) Delete(category *domain.Category) error {
-	return categoryRepository.Delete(category).Error
-}
-
-func (categoryRepository *CategoryRepository) FindAll() ([]*domain.Category, error) {
-	categories := []*domain.Category{}
-
-	err := categoryRepository.Find(&categories).Error
-	if err != nil {
-		return nil, err
+func (categoryRepository *CategoryRepository) Store(cg domain.Category) (category domain.Category, err error) {
+	if err = categoryRepository.Create(&cg).Error; err != nil {
+		return
 	}
+	category = cg
+	return
+}
 
-	return categories, nil
+func (categoryRepository *CategoryRepository) Update(cg domain.Category) (category domain.Category, err error) {
+	if err = categoryRepository.Save(&cg).Error; err != nil {
+		return
+	}
+	category = cg
+	return
+}
+
+func (categoryRepository *CategoryRepository) Delete(category domain.Category) (err error) {
+	if err = categoryRepository.Delete(&category).Error; err != nil {
+		return
+	}
+	return
+}
+
+func (categoryRepository *CategoryRepository) FindAll() (categories domain.Categories, err error) {
+	if err = categoryRepository.Find(&categories).Error; err != nil {
+		return
+	}
 }
