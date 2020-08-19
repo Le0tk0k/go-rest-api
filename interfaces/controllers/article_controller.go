@@ -67,11 +67,12 @@ func (controller *ArticleController) UpdateArticle(c echo.Context) error {
 	c.Bind(&a)
 
 	article, err := controller.Interactor.Update(a)
+
 	if err != nil {
 		c.JSON(500, NewError(err))
 		return
 	}
-	c.JSON(201, user)
+	c.JSON(201, article)
 	return
 }
 
@@ -84,6 +85,6 @@ func (controller *ArticleController) DeleteArticle(c echo.Context) error {
 		c.JSON(500, NewError(err))
 		return
 	}
-	c.JSON(200, user)
+	c.JSON(200, article)
 	return
 }

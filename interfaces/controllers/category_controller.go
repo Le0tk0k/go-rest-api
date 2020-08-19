@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"net/http"
 	"strconv"
 
 	"github.com/Le0tk0k/go-rest-api/domain"
@@ -25,75 +24,65 @@ func NewCategoryController(sqlHandler database.SqlHandler) *CategoryController {
 }
 
 func (controller *CategoryController) CreateCategory(c echo.Context) error {
-	cg := &domain.Category{}
-	if err := c.Bind(cg); err != nil {
-		return c.JSON(http.StatusBadRequest, domain.ResponseError{Message: err.Error()})
-	}
+	cg := domain.Category{}
+	c.Bind(&cg)
+	category, err := controller.Interactor.Add(cg)
 
-	category, err := controller.Interactor.Add(*cg)
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, domain.ResponseError{Message: err.Error()})
+		c.JSON(500, NewError(err))
+		return
 	}
-
-	return c.JSON(http.StatusOK, category)
+	c.JSON(201, article)
+	return
 }
 
 func (controller *CategoryController) GetCategories(c echo.Context) error {
 	categories, err := controller.Interactor.Categories()
 
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, domain.ResponseError{Message: err.Error()})
+		c.JSON(500, NewError(err))
+		return
 	}
-
-	return c.JSON(http.StatusOK, categories)
+	c.JSON(200, articles)
+	return
 }
 
 func (controller *CategoryController) GetCategory(c echo.Context) error {
-	idString := c.Param("id")
-	id, err := strconv.Atoi(idString)
-	if err != nil {
-		return c.JSON(http.StatusBadRequest, domain.ResponseError{Message: err.Error()})
-	}
-
+	id, _ := strconv.Atoi(c.Param("id"))
 	category, err := controller.Interactor.CategoryByID(id)
-	if err != nil {
-		return c.JSON(http.StatusBadRequest, domain.ResponseError{Message: err.Error()})
-	}
 
-	return c.JSON(http.StatusOK, category)
+	if err != nil {
+		c.JSON(500, NewError(err))
+		return
+	}
+	c.JSON(200, articles)
+	return
 }
 
 func (controller *CategoryController) UpdateCategory(c echo.Context) error {
-	idString := c.Param("id")
-	id, err := strconv.Atoi(idString)
+	id, _ := strconv.Atoi(c.Param("id"))
+	cg := domain.Category{ID: id}
+	c.Bind(&cg)
+
+	category, err := controller.Interactor.Update(cg)
+
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, domain.ResponseError{Message: err.Error()})
+		c.JSON(500, NewError(err))
+		return
 	}
-
-	category := &domain.Category{ID: id}
-
-	if err := c.Bind(category); err != nil {
-		return c.JSON(http.StatusBadRequest, domain.ResponseError{Message: err.Error()})
-	}
-
-	if err := controller.Interactor.Update(category); err != nil {
-		return c.JSON(http.StatusBadRequest, domain.ResponseError{Message: err.Error()})
-	}
-
-	return c.JSON(http.StatusOK, category)
+	c.JSON(201, category)
+	return
 }
 
 func (controller *CategoryController) DeleteCategory(c echo.Context) error {
-	idString := c.Param("id")
-	id, err := strconv.Atoi(idString)
+	id, _ := strconv.Atoi(c.Param("id"))
+	category := domain.Category{ID: id}
+
+	err := controller.Interactor.DeleteById(category)
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, domain.ResponseError{Message: err.Error()})
+		c.JSON(500, NewError(err))
+		return
 	}
-
-	category := &domain.Category{ID: id}
-	if err := controller.Interactor.DeleteById(cateogyr); err != nil {
-		return c.JSON(http.StatusBadRequest, domain.ResponseError{Message: err.Error()})
-	}
-
-	return c.JSON(http.StatusOK, category)
+	c.JSON(200, category)
+	return
 }
