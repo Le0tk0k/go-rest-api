@@ -27,6 +27,6 @@ func (interactor *ArticleInteractor) Update(a domain.Article) (article domain.Ar
 }
 
 func (interactor *ArticleInteractor) DeleteById(article domain.Article) (err error) {
-	err = interactor.ArticleRepository.DeleteBy(article)
+	err = interactor.ArticleRepository.Delete(article)
 	return
 }
