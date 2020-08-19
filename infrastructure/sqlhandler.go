@@ -79,5 +79,5 @@ func (handler *SqlHandler) Model(value interface{}) *gorm.DB {
 }
 
 func (handler *SqlHandler) Updates(value interface{}, ignoreProtectedAttrs ...bool) *gorm.DB {
-	return handler.Conn.Updates(value, ignoreProtectedAttrs)
+	return handler.Conn.Updates(value, ignoreProtectedAttrs...)
 }
