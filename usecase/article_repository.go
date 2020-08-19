@@ -3,9 +3,9 @@ package usecase
 import "github.com/Le0tk0k/go-rest-api/domain"
 
 type ArticleRepository interface {
-	FindByID(id int) (*domain.Article, error)
-	Store(article *domain.Article) error
-	Update(article *domain.Article) error
-	Delete(article *domain.Article) error
-	FindAll() ([]*domain.Article, error)
+	FindByID(id int) (domain.Article, error)
+	Store(domain.Article) (domain.Article, error)
+	Update(domain.Article) (domain.Article, error)
+	Delete(domain.Article) error
+	FindAll() (domain.Articles, error)
 }
