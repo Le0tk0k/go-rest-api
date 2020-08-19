@@ -73,3 +73,11 @@ func (handler *SqlHandler) Delete(value interface{}) *gorm.DB {
 func (handler *SqlHandler) Where(query interface{}, args ...interface{}) *gorm.DB {
 	return handler.Conn.Where(query, args...)
 }
+
+func (handler *SqlHandler) Model(value interface{}) *gorm.DB {
+	return handler.Conn.Model(value)
+}
+
+func (handler *SqlHandler) Updates(value interface{}, ignoreProtectedAttrs ...bool) *gomr.DB {
+	return handler.Conn.Updates(value, ignoreProtectedAttrs)
+}
