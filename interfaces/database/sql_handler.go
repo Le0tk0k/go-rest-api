@@ -11,4 +11,6 @@ type SqlHandler interface {
 	Save(interface{}) *gorm.DB
 	Delete(interface{}) *gorm.DB
 	Where(interface{}, ...interface{}) *gorm.DB
+	Model(interface{}) *gorm.DB
+	Updates(interface{}, ...bool) *gorm.DB
 }
