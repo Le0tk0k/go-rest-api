@@ -9,8 +9,8 @@ import (
 func Init() {
 	e := echo.New()
 
-	articleController := controllers.NewArticleController(NewSqlHandler())
-	categoryController := controllers.NewCategoryController(NewSqlHandler())
+	articleController := controllers.NewArticleController(NewMySqlDb())
+	categoryController := controllers.NewCategoryController(NewMySqlDb())
 
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
