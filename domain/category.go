@@ -8,3 +8,5 @@ type Category struct {
 	CreatedAt time.Time `json:"-"`
 	UpdatedAt time.Time `json:"-"`
 }
+
+type Categories []Category
