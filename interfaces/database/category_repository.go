@@ -6,7 +6,7 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-type categoryRepository struct {
+type CategoryRepository struct {
 	SqlHandler
 }
 
@@ -14,7 +14,7 @@ func NewCategoryRepository(db *gorm.DB) repository.CategoryRepository {
 	return &categoryRepository{db}
 }
 
-func (categoryRepository *categoryRepository) FindByID(id int) (*domain.Category, error) {
+func (categoryRepository *CategoryRepository) FindByID(id int) (*domain.Category, error) {
 	category := domain.Category{}
 	err := categoryRepository.First(&category, id).Error
 	if err != nil {
@@ -24,19 +24,19 @@ func (categoryRepository *categoryRepository) FindByID(id int) (*domain.Category
 	return &category, nil
 }
 
-func (categoryRepository *categoryRepository) Store(category *domain.Category) error {
+func (categoryRepository *CategoryRepository) Store(category *domain.Category) error {
 	return categoryRepository.Save(category).Error
 }
 
-func (categoryRepository *categoryRepository) Update(category *domain.Category) error {
+func (categoryRepository *CategoryRepository) Update(category *domain.Category) error {
 	return categoryRepository.Model(&domain.Category{ID: category.ID}).Updates(category).Error
 }
 
-func (categoryRepository *categoryRepository) Delete(category *domain.Category) error {
+func (categoryRepository *CategoryRepository) Delete(category *domain.Category) error {
 	return categoryRepository.Delete(category).Error
 }
 
-func (categoryRepository *categoryRepository) FindAll() ([]*domain.Category, error) {
+func (categoryRepository *CategoryRepository) FindAll() ([]*domain.Category, error) {
 	categories := []*domain.Category{}
 
 	err := categoryRepository.Find(&categories).Error
