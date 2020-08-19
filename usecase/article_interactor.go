@@ -16,13 +16,13 @@ func (interactor *ArticleInteractor) Articles() (articles domain.Article, err er
 	return
 }
 
-func (interactor *ArticleInteractor) Add(article domain.Article) (article domain.Article, err error) {
-	article, err = interactor.ArticleRepository.Store(article)
+func (interactor *ArticleInteractor) Add(a domain.Article) (article domain.Article, err error) {
+	article, err = interactor.ArticleRepository.Store(a)
 	return
 }
 
-func (interactor *ArticleInteractor) Update(article domain.Article) (article domain.Article, err error) {
-	article, err = interactor.ArticleRepository.Update(article)
+func (interactor *ArticleInteractor) Update(a domain.Article) (article domain.Article, err error) {
+	article, err = interactor.ArticleRepository.Update(a)
 	return
 }
 
