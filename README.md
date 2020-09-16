@@ -103,7 +103,3 @@ Delete an category
 ```
 DELETE /categories/:id
 ```
-
-## Todo
-- [ ] ArticleとCategoryの関連付け。多対一リレーション
-- [ ] MySQLの永続化。コンテナを立ち上げ直した際もデータを残す。
