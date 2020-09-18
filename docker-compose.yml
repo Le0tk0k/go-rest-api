@@ -18,7 +18,6 @@ services:
     build:
       context: .
       dockerfile: ./docker/api/Dockerfile
-    tty: true
     volumes: 
       - ./:/go/src/github.com/Le0tk0k/go-rest-api
     ports: 
