@@ -18,88 +18,48 @@ $ docker-compose up -d
 
 ## API Docments
 
-### Article
+### User
 **Response**
 
 ```
 [
     {
         "id": 1,
-        "title": "article1",
-        "url": "article1.com"
+        "name": "user1",
+        "age": 20
     }
 ]
 ```
 
 **Endpoint**
 
-Get all articles
+Get all users
 
 ```
-GET /articles
+GET /users
 ```
 
-Get an article by id
+Get an user by id
 
 ```
-GET /articles/:id
+GET /users/:id
 ```
 
-Create an article
+Create an user
 
 ```
-POST /articles
+POST /users
 ```
 
-Update an article
+Update an user
 
 ```
-PUT /articles/:id
+PUT /users/:id
 ```
 
-Delete an article
+Delete an user
 
 ```
-DELETE /articles/:id
+DELETE /users/:id
 ```
 
-### Category
-**Response**
-
-```
-{
-    "name": "category1"
-}
-```
-
-**Endpoint**
-
-Get all categories
-
-```
-GET /categories
-```
-
-Get an category by id
-
-```
-GET /categories/:id
-```
-
-Create an category
-
-```
-POST /categories
-```
-
-Update an category
-
-```
-PUT /categories/:id
-```
-
-Delete an category
-
-```
-DELETE /categories/:id
-```
