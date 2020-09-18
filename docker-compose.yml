@@ -8,6 +8,7 @@ services:
       - "3306:3306"
     volumes: 
       - ./docker/mysql/db:/docker-entrypoint-initdb.d
+      - ./docker/mysql/db/mysql_data:/var/lib/mysql
     environment: 
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: go_rest_api
