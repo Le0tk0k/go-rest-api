@@ -2,11 +2,12 @@ package domain
 
 import "time"
 
-type Category struct {
-	ID        int       `gorm:"primary_key" json:"id`
+type User struct {
+	ID        int       `gorm:"primary_key" json:"id"`
 	Name      string    `json:"name"`
+	Age       int       `json:"age"`
 	CreatedAt time.Time `json:"-"`
 	UpdatedAt time.Time `json:"-"`
 }
 
-type Categories []Category
+type Users []User

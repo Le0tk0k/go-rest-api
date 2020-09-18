@@ -9,23 +9,16 @@ import (
 func Init() {
 	e := echo.New()
 
-	articleController := controllers.NewArticleController(NewMySqlDb())
-	categoryController := controllers.NewCategoryController(NewMySqlDb())
+	userController := controllers.NewUserController(NewMySqlDb())
 
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	e.GET("/articles", func(c echo.Context) error { return articleController.GetArticles(c) })
-	e.GET("/articles/:id", func(c echo.Context) error { return articleController.GetArticle(c) })
-	e.POST("/articles", func(c echo.Context) error { return articleController.CreateArticle(c) })
-	e.PUT("/articles/:id", func(c echo.Context) error { return articleController.UpdateArticle(c) })
-	e.DELETE("/articles/:id", func(c echo.Context) error { return articleController.DeleteArticle(c) })
-
-	e.GET("/categories", func(c echo.Context) error { return categoryController.GetCategories(c) })
-	e.GET("/categories/:id", func(c echo.Context) error { return categoryController.GetCategory(c) })
-	e.POST("/categories", func(c echo.Context) error { return categoryController.CreateCategory(c) })
-	e.PUT("/categories/:id", func(c echo.Context) error { return categoryController.UpdateCategory(c) })
-	e.DELETE("/categories/:id", func(c echo.Context) error { return categoryController.DeleteCategory(c) })
+	e.GET("/users", func(c echo.Context) error { return userController.GetUsers(c) })
+	e.GET("/users/:id", func(c echo.Context) error { return userController.GetUser(c) })
+	e.POST("/users", func(c echo.Context) error { return userController.CreateUser(c) })
+	e.PUT("/users/:id", func(c echo.Context) error { return userController.UpdateUser(c) })
+	e.DELETE("/users/:id", func(c echo.Context) error { return userController.DeleteUser(c) })
 
 	e.Logger.Fatal(e.Start(":8080"))
 }
