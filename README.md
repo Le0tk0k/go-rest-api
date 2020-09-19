@@ -42,25 +42,25 @@ Get all users
 GET /users
 ```
 
-Get an user by id
+Get a user by id
 
 ```
 GET /users/:id
 ```
 
-Create an user
+Create a user
 
 ```
 POST /users
 ```
 
-Update an user
+Update a user
 
 ```
 PUT /users/:id
 ```
 
-Delete an user
+Delete a user
 
 ```
 DELETE /users/:id
