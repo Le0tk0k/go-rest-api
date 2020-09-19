@@ -8,6 +8,9 @@
 - ORM : GORM (https://github.com/jinzhu/gorm)
 - Architecture : Clean Architecture
 
+## Explanation Entry
+[Go(Echo)×MySQL×Docker×Clean ArchitectureでAPIサーバー構築してみた](https://qiita.com/Le0tk0k/items/c2945c260f28f7ee2d47)
+
 ## How To Run This API Server
 
 ```
