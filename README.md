@@ -21,7 +21,6 @@ $ docker-compose up -d
 
 ## API Docments
 
-### User
 **Response example**
 
 ```
