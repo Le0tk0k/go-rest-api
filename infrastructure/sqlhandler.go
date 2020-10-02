@@ -24,7 +24,7 @@ func NewMySqlDb() database.SqlHandler {
 		"go_rest_api",
 	)
 
-	conn, err := open(connectionString, 30)
+	conn, err := open(connectionString, 40)
 	if err != nil {
 		panic(err)
 	}
